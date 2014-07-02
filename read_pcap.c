@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <libgen.h>
 #include "eth2.h"
+#include "ip.h"
 
 #define IFSZ 16
 #define FLTRSZ 120
@@ -164,6 +165,12 @@ print_pkt_fields(u_char *user, const struct pcap_pkthdr *hdr, const u_char *data
   if (hdr->caplen >= 14) {
     print_ether_fields(data, offset);
   }
+
+  if (hdr->caplen >= 34) {
+    offset = 14;
+    print_ip_fields(data, offset);
+  }
+
   printf("\n");
   packets++; /* keep a running total of number of packets read in */
 }
