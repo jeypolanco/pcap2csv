@@ -14,6 +14,12 @@ void print_ihl(const u_char * data, int offset)
   printf("\"ihl, %x\",", (mask & data[offset]));
 }
 
+int get_ihl(const u_char * data, int offset)
+{
+  int mask = 0xf;
+  return (mask & data[offset]) * 4;
+}
+
 void print_tos_ip(const u_char * data, int offset)
 {
   printf("\"tos, %02x\",", data[offset+1]);
@@ -22,6 +28,16 @@ void print_tos_ip(const u_char * data, int offset)
 void print_tot_len(const u_char * data, int offset)
 {
   printf("\"datagram_len, %02x%02x\",", data[offset+2], data[offset+3]);
+}
+
+int get_tot_len(const u_char * data, int offset)
+{
+  int x_mask = 0x0000ff00;
+  int x = (x_mask & data[offset+2] << 8);
+  int y_mask = 0x000000ff;
+  int y = (y_mask & data[offset+3]);
+  int val = x | y;
+  return val;
 }
 
 void print_id_ip(const u_char * data, int offset)

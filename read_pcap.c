@@ -11,6 +11,7 @@
 #include <libgen.h>
 #include "eth2.h"
 #include "ip.h"
+#include "tcp.h"
 
 #define IFSZ 16
 #define FLTRSZ 120
@@ -153,6 +154,8 @@ usage(char *progname)
 void
 print_pkt_fields(u_char *user, const struct pcap_pkthdr *hdr, const u_char *data)
 {
+  int ihl;
+  int tot_len_ip;
   int offset = 0;
 
   if (hdr->caplen < 0) {
@@ -169,8 +172,16 @@ print_pkt_fields(u_char *user, const struct pcap_pkthdr *hdr, const u_char *data
   if (hdr->caplen >= 34) {
     offset = 14;
     print_ip_fields(data, offset);
+    ihl = get_ihl(data, offset);
+    tot_len_ip = get_tot_len(data, offset);
+    
   }
 
+  if (tot_len_ip - ihl >= 20) {
+    offset = ihl + 14;
+    print_tcp_fields(data, offset);
+  }
+  
   printf("\n");
   packets++; /* keep a running total of number of packets read in */
 }

@@ -3,8 +3,10 @@
 
 void print_version_ip(const u_char * data, int offset);
 void print_ihl(const u_char * data, int offset);
+int get_ihl(const u_char * data, int offset);
 void print_tos_ip(const u_char * data, int offset);
 void print_tot_len(const u_char * data, int offset);
+int get_tot_len(const u_char * data, int offset);
 void print_id_ip(const u_char * data, int offset);
 void print_flags_ip(const u_char * data, int offset);
 void print_frag_off(const u_char * data, int offset);
