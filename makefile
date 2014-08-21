@@ -1,8 +1,8 @@
-read_pcap: read_pcap.o eth2.o ip.o tcp.o
-	gcc -Wall -g -o bread_pcap read_pcap.o eth2.o ip.o tcp.o -l pcap
+pcap2csv: pcap2csv.o eth2.o ip.o tcp.o
+	gcc -Wall -g -o pcap2csv pcap2csv.o eth2.o ip.o tcp.o -l pcap
 
-read_pcap.o: read_pcap.c eth2.h ip.h tcp.h
-	gcc -Wall -g -c read_pcap.c
+pcap2csv.o: pcap2csv.c eth2.h ip.h tcp.h
+	gcc -Wall -g -c pcap2csv.c
 
 ip.o: ip.c
 	gcc -Wall -g -c ip.c
