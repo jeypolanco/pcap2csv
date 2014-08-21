@@ -93,31 +93,7 @@ main(int argc, char **argv)
     exit(4);
   }
 
-  printf("\nPackets read in: %d\n", packets);
-
-  /*
-   * Print out the major and minor version numbers. These are the version
-   * numbers associated with this revision of the packet capture library.
-   * The major and minor version numbers can be used to help determine
-   * what revision of libpcap created the savefile, and, therefore, what
-   * format was used when it was written.
-   */
-
-  if (!(majver = pcap_major_version(p))) {
-    fprintf(stderr,
-	    "Error getting major version number from interface %s",
-	    ifname);
-    exit(5);
-  }
-  printf("The major version number used to create the savefile was: %d.\n", majver);
-
-  if (!(minver = pcap_minor_version(p))) {
-    fprintf(stderr,
-	    "Error getting minor version number from interface %s",
-	    ifname);
-    exit(6);
-  }
-  printf("The minor version number used to create the savefile was: %d.\n", minver);
+  //  printf("\nPackets read in: %d\n", packets);
 
   /*
    * Close the packet capture device and free the memory used by the

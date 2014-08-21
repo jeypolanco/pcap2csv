@@ -26,3 +26,6 @@ byt2int: byt2int.c
 clean:
 	find . -maxdepth 1 -type f -perm 775 -delete
 	find . -maxdepth 1 -type f -iname '*.o' -delete
+
+test: test.py csv2sql.py
+	python -m unittest test

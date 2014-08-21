@@ -16,7 +16,7 @@ void print_src_mac(const u_char * data, int offset)
 
 void print_ether_type(const u_char * data, int offset)
 {
-  printf("\"ether_type, %02x%02x\",", data[offset+12], data[offset+13]);
+  printf("\"ether_type, 0x%02x%02x\",", data[offset+12], data[offset+13]);
 }
 
 void print_ether_fields(const u_char * data, int offset)

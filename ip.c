@@ -5,13 +5,13 @@ void print_version_ip(const u_char * data, int offset)
 {
   int mask = 0b00001111;
   int value = data[offset] >> 4;
-  printf("\"version, %01x\",", (mask & value));
+  printf("\"version, 0x%01x\",", (mask & value));
 }
 
 void print_ihl(const u_char * data, int offset)
 {
   int mask = 0b00001111;
-  printf("\"ihl, %x\",", (mask & data[offset]));
+  printf("\"ihl, %d\",", (mask & data[offset]) * 4);
 }
 
 int get_ihl(const u_char * data, int offset)
@@ -22,12 +22,17 @@ int get_ihl(const u_char * data, int offset)
 
 void print_tos_ip(const u_char * data, int offset)
 {
-  printf("\"tos, %02x\",", data[offset+1]);
+  printf("\"tos, 0x%02x\",", data[offset+1]);
 }
 
 void print_tot_len(const u_char * data, int offset)
 {
-  printf("\"datagram_len, %02x%02x\",", data[offset+2], data[offset+3]);
+  int x_mask = 0x0000ff00;
+  int x = (x_mask & data[offset+2] << 8);
+  int y_mask = 0x000000ff;
+  int y = (y_mask & data[offset+3]);
+  int val = x | y;
+  printf("\"datagram_len, %d\",", val);
 }
 
 int get_tot_len(const u_char * data, int offset)
@@ -42,35 +47,35 @@ int get_tot_len(const u_char * data, int offset)
 
 void print_id_ip(const u_char * data, int offset)
 {
-  printf("\"id, %02x%02x\",", data[offset+4], data[offset+5]);
+  printf("\"id, 0x%02x%02x\",", data[offset+4], data[offset+5]);
 }
 
 void print_flags_ip(const u_char * data, int offset)
 {
   int mask = 0b00000111;
   int value = data[offset+6] >> 5;
-  printf("\"flags, %01x\",", (mask & value));
+  printf("\"flags, 0x%01x\",", (mask & value));
 }
 
 void print_frag_off(const u_char * data, int offset)
 {
   int mask = 0x1F;
-  printf("\"frag_off, %02x%02x\",", (mask & data[offset+6]), data[offset+7]);
+  printf("\"frag_off, 0x%02x%02x\",", (mask & data[offset+6]), data[offset+7]);
 }
 
 void print_ttl_ip(const u_char * data, int offset)
 {
-  printf("\"ttl, %02x\",", data[offset+8]);
+  printf("\"ttl, 0x%02x\",", data[offset+8]);
 }
 
 void print_protocol(const u_char * data, int offset)
 {
-  printf("\"protocol, %02x\",", data[offset+9]);
+  printf("\"protocol, 0x%02x\",", data[offset+9]);
 }
 
 void print_chksum(const u_char * data, int offset)
 {
-  printf("\"header checksum, %02x%02x\",", data[offset+10], data[offset+11]);
+  printf("\"header checksum, 0x%02x%02x\",", data[offset+10], data[offset+11]);
 }
 
 void print_src_ip_addr(const u_char * data, int offset)

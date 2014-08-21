@@ -40,11 +40,11 @@ void print_ack_num(const u_char * data, int offset)
 }
 void print_data_off(const u_char * data, int offset)
 {
-  printf("\"tcp_head_len, %d\"", (data[offset+12] >> 4) * 4);
+  printf("\"tcp_head_len, %d\",", (data[offset+12] >> 4) * 4);
 }
 void print_cntrl_bits(const u_char * data, int offset)
 {
-  printf("\"tcp_head_len, 0x%x\"", data[offset+13]);
+  printf("\"cntrl_bits, 0x%x\",", data[offset+13]);
 }
 void print_window(const u_char * data, int offset)
 {
