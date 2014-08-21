@@ -13,15 +13,6 @@ eth2.o: eth2.c
 tcp.o: tcp.c
 	gcc -Wall -g -c tcp.c
 
-pcap2csv: pcap2csv.c
-	gcc -Wall -g -o bpcap2csv pcap2csv.c -l bsd
-
-bitmask: bitmask.c
-	gcc -Wall -g -o bitmask bitmask.c
-
-byt2int: byt2int.c
-	gcc -Wall -g -o byt2int byt2int.c
-
 .PHONY: clean
 clean:
 	find . -maxdepth 1 -type f -perm 775 -delete
